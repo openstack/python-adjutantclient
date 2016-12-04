@@ -20,6 +20,7 @@ from adjutantclient.v1 import status
 from adjutantclient.v1 import tasks
 from adjutantclient.v1 import tokens
 from adjutantclient.v1 import users
+from adjutantclient.v1 import quota
 
 
 class Client(object):
@@ -45,3 +46,4 @@ class Client(object):
         self.notifications = notifications.NotificationManager(
             self.http_client)
         self.status = status.StatusManager(self.http_client)
+        self.quota = quota.QuotaManager(self.http_client)
