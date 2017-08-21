@@ -1,5 +1,5 @@
 [gerrit]
-host=gerrit.dmz.wgtn.cat-it.co.nz
+host=review.openstack.org
 port=29418
-project=openstack-registrationclient.git
+project=openstack/python-adjutantclient.git
 defaultbranch=master
