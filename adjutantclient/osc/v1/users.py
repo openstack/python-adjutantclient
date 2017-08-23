@@ -13,7 +13,6 @@
 #    under the License.
 
 import logging
-import six
 
 from osc_lib import utils
 from osc_lib.command import command
@@ -58,7 +57,7 @@ class UserShow(command.ShowOne):
         # be better to do something slightly different here
         user_id = utils.find_resource(client.users, parsed_args.user)
         user = client.users.get(user_id)
-        return zip(*six.iteritems(user.to_dict()))
+        return zip(*(user.to_dict()).items())
 
 
 class UserInvite(command.Command):

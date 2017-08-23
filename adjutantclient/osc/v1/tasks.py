@@ -13,9 +13,7 @@
 #    under the License.
 
 import logging
-import six
 import json
-
 from osc_lib.command import command
 from osc_lib.i18n import _
 
@@ -34,7 +32,7 @@ def _show_task(task_id, client, formatter):
             getattr(task, 'action_notes', ""), indent=2)
         task._info['approved_by'] = json.dumps(
             getattr(task, 'approved_by', ""), indent=2)
-    return zip(*six.iteritems(task.to_dict()))
+    return zip(*(task.to_dict()).items())
 
 
 class TaskList(command.Lister):

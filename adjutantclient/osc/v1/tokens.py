@@ -14,7 +14,6 @@
 
 import logging
 import json
-import six
 
 from osc_lib.command import command
 from osc_lib.i18n import _
@@ -75,7 +74,7 @@ class TokenShow(command.ShowOne):
         else:
             client = adjutant_client.Client("1", parsed_args.bypass_url)
         token = client.tokens.get(parsed_args.token)
-        return zip(*six.iteritems(token.to_dict()))
+        return zip(*(token.to_dict()).items())
 
 
 class TokenSubmit(command.Command):

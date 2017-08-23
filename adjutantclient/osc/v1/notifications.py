@@ -13,7 +13,6 @@
 #    under the License.
 
 import logging
-import six
 import json
 
 from osc_lib.i18n import _
@@ -28,7 +27,7 @@ def _show_notification(notification_id, client, formatter):
     if formatter == 'table':
         notification._info['notes'] = json.dumps(
             notification.notes, indent=2)
-    return zip(*six.iteritems(notification.to_dict()))
+    return zip(*(notification.to_dict()).items())
 
 
 class NotificationList(command.Lister):
