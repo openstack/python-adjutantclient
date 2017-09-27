@@ -20,3 +20,4 @@ adjutantclient/versioninfo
 .pypirc
 env/
 *~
+.stestr/
