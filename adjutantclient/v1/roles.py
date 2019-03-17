@@ -82,7 +82,7 @@ class UserRoleManager(base.BaseManager):
         try:
             self._put(url, json=params, response_key=None)
         except exc.HTTPBadRequest as e:
-            print e.message
+            print(e.message)
             return False
 
         return True
@@ -103,7 +103,7 @@ class UserRoleManager(base.BaseManager):
         try:
             self._delete(url, json=params, response_key=None)
         except exc.HTTPBadRequest as e:
-            print e.message
+            print(e.message)
             return False
 
         return True

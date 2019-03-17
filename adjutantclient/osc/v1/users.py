@@ -20,6 +20,7 @@ from osc_lib.command import command
 from osc_lib.i18n import _
 
 from adjutantclient import client as adjutant_client
+from adjutantclient import exc
 
 LOG = logging.getLogger(__name__)
 
@@ -105,7 +106,10 @@ class UserInviteCancel(command.Command):
     def take_action(self, parsed_args):
         client = self.app.client_manager.registration
         for user in parsed_args.user:
-            user_id = utils.find_resource(client.users, user)
+            try:
+                user_id = client.users.find(name=user).id
+            except exc.NotFound:
+                user_id = client.users.find(id=user).id
             client.users.cancel(user_id=user_id)
         print("Invite(s) Cancelled")
 
