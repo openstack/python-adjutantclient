@@ -18,10 +18,10 @@ from osc_lib import utils
 
 LOG = logging.getLogger(__name__)
 
-DEFAULT_OS_REGISTRATION_VERSION = '1'
+DEFAULT_OS_ADMIN_LOGIC_VERSION = '1'
 DEFAULT_API_VERSION = '1'
-API_VERSION_OPTION = 'os_registration_version'
-API_NAME = "registration"
+API_VERSION_OPTION = 'os_admin_logic_version'
+API_NAME = "admin_logic"
 API_VERSIONS = {
     "1": "adjutantclient.v1.client.Client",
 }
@@ -47,17 +47,9 @@ def make_client(instance):
     kwargs = {'region_name': instance.region_name}
 
     if instance.session:
-        kwargs.update({'session': instance.session,
-                       'service_type': API_NAME})
+        kwargs.update({'session': instance.session})
     else:
-        endpoint = instance.get_endpoint_for_service_type(
-            API_NAME,
-            region_name=instance.region_name,
-            interface=instance.interface,
-        )
-
-        kwargs.update({'endpoint': endpoint,
-                       'auth_url': instance.auth.auth_url,
+        kwargs.update({'auth_url': instance.auth.auth_url,
                        'username': instance.auth_ref.username,
                        'token': instance.auth_ref.auth_token})
 
@@ -69,12 +61,12 @@ def make_client(instance):
 def build_option_parser(parser):
     """Hook to add global options."""
     parser.add_argument(
-        '--os-registration-version',
-        metavar='<registration-version>',
+        '--os-admin-logic-version',
+        metavar='<admin-logic-version>',
         default=utils.env(
-            'OS_REGISTRATION_VERSION',
-            default=DEFAULT_OS_REGISTRATION_VERSION),
+            'OS_ADMIN_LOGIC_VERSION',
+            default=DEFAULT_OS_ADMIN_LOGIC_VERSION),
         help=('Client version, default=' +
-              DEFAULT_OS_REGISTRATION_VERSION +
-              ' (Env: DEFAULT_OS_REGISTRATION_VERSION)'))
+              DEFAULT_OS_ADMIN_LOGIC_VERSION +
+              ' (Env: DEFAULT_OS_ADMIN_LOGIC_VERSION)'))
     return parser

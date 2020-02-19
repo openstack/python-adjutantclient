@@ -49,7 +49,7 @@ class TokenList(command.Lister):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         return _list_tokens(client, parsed_args.filters)
 
 
@@ -71,7 +71,7 @@ class TokenShow(command.ShowOne):
         if not parsed_args.bypass_url:
             self.app.client_manager._auth_required = True
             self.app.client_manager.setup_auth()
-            client = self.app.client_manager.registration
+            client = self.app.client_manager.admin_logic
         else:
             client = adjutant_client.Client("1", parsed_args.bypass_url)
         token = client.tokens.get(parsed_args.token)
@@ -91,7 +91,7 @@ class TokenSubmit(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         resp = client.tokens.submit(
             parsed_args.token, json.loads(parsed_args.data))
         print('Success', ' '.join(resp.notes))
@@ -101,7 +101,7 @@ class TokenClear(command.Lister):
     """Clear Expired tokens, admin only."""
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         resp = client.tokens.clear_expired()
         print('Success. ' + ' '.join(resp.json()['notes']))
         return _list_tokens(client)

@@ -39,7 +39,7 @@ class QuotaShow(command.Lister):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         if not parsed_args.region:
             quota_data = client.quota.get()
@@ -76,7 +76,7 @@ class QuotaSizes(command.Lister):
     """
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         quota_data = client.quota.get()
 
@@ -98,7 +98,7 @@ class QuotaTasks(command.Lister):
     """
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         quota_data = client.quota.get()
 
@@ -137,7 +137,7 @@ class QuotaUpdate(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         if parsed_args.regions:
             status = client.quota.update(parsed_args.size, parsed_args.regions)
         else:

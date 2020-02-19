@@ -33,7 +33,7 @@ You can use the API with a keystone session:
 If you use a clouds.yaml file os_client_config can also be used:
 
   >>> import os_client_config
-  >>> sess = os_client_config.make_rest_client('registration')
+  >>> sess = os_client_config.make_rest_client('admin-logic')
   >>> adjutant = Client('1', session=sess)
 
 A few of the endpoints (users.password_forgot(), token.submit(), signup, token.get()) don't require authentication.

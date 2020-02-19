@@ -25,7 +25,7 @@ class Status(command.Command):
     """Lists adjutant tasks. """
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         status = client.status.get().json()
         print(json.dumps(status, indent=2))

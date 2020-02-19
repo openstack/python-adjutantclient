@@ -132,7 +132,7 @@ def _construct_http_client(endpoint=None, username=None, password=None,
         kwargs['endpoint_override'] = endpoint
 
     if 'service_type' not in kwargs:
-        kwargs['service_type'] = 'registration'
+        kwargs['service_type'] = 'admin-logic'
 
     if 'interface' not in kwargs and endpoint_type:
         kwargs['interface'] = endpoint_type

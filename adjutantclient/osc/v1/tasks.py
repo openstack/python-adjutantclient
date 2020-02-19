@@ -56,7 +56,7 @@ class TaskList(command.Lister):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         kwargs = {'filters': parsed_args.filters}
 
@@ -88,7 +88,7 @@ class TaskShow(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         return _show_task(parsed_args.task_id, client, parsed_args.formatter)
 
 
@@ -103,7 +103,7 @@ class TaskApprove(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         client.tasks.approve(parsed_args.task_id)
         return _show_task(parsed_args.task_id, client, parsed_args.formatter)
 
@@ -119,7 +119,7 @@ class TaskCancel(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         client.tasks.cancel(task_id=parsed_args.task_id)
         return _show_task(parsed_args.task_id, client, parsed_args.formatter)
 
@@ -138,7 +138,7 @@ class TaskUpdate(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         client.tasks.update(task_id=parsed_args.task_id,
                             data=json.loads(parsed_args.data))
         return _show_task(parsed_args.task_id, client, parsed_args.formatter)
@@ -154,6 +154,6 @@ class TaskTokenReissue(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         resp = client.tokens.reissue(task_id=parsed_args.task_id)
         print('Success', ' '.join(resp.notes))

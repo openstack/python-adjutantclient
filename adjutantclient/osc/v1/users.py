@@ -29,7 +29,7 @@ class UserList(command.Lister):
     """Lists users in the currently scoped project. """
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         project_users = client.users.list()
         headers = [
             'id', 'name', 'email', 'roles', 'cohort', 'status']
@@ -53,7 +53,7 @@ class UserShow(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         # This ends up for names doing multiple requests, it may
         # be better to do something slightly different here
         user_id = utils.find_resource(client.users, parsed_args.user)
@@ -85,7 +85,7 @@ class UserInvite(command.Command):
     def take_action(self, parsed_args):
         if not parsed_args.roles:
             parsed_args.roles = ['Member']
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         client.users.invite(
             username=parsed_args.username, email=parsed_args.email,
             role_list=parsed_args.roles)
@@ -104,7 +104,7 @@ class UserInviteCancel(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         for user in parsed_args.user:
             try:
                 user_id = client.users.find(name=user).id
@@ -128,7 +128,7 @@ class UserRoleAdd(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         role = utils.find_resource(client.managed_roles, parsed_args.role)
         user = utils.find_resource(client.users, parsed_args.user)
@@ -150,7 +150,7 @@ class UserRoleRemove(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         role = utils.find_resource(client.managed_roles, parsed_args.role)
         user = utils.find_resource(client.users, parsed_args.user)
 
@@ -169,7 +169,7 @@ class UserRoleList(command.Lister):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         user = utils.find_resource(client.users, parsed_args.user)
         kwargs = {'user': user.id}
@@ -181,7 +181,7 @@ class UserRoleList(command.Lister):
 class ManageableRolesList(command.Lister):
     """ Lists roles able to be managed by the current user """
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         roles = client.managed_roles.list()
 
         headers = ['id', 'name']
@@ -205,7 +205,7 @@ class PasswordReset(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         data = {'email': parsed_args.email}
         if parsed_args.username:
@@ -240,7 +240,7 @@ class PasswordForgot(command.Command):
         if not parsed_args.bypass_url:
             self.app.client_manager._auth_required = True
             self.app.client_manager.setup_auth()
-            client = self.app.client_manager.registration
+            client = self.app.client_manager.admin_logic
         else:
             client = adjutant_client.Client(1, parsed_args.bypass_url)
 

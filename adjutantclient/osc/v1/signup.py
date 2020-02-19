@@ -58,7 +58,7 @@ class Signup(command.Command):
             # user wanting to access and submit a sign up (I.E. an admin)
             self.app.client_manager._auth_required = True
             self.app.client_manager.setup_auth()
-            client = self.app.client_manager.registration
+            client = self.app.client_manager.admin_logic
         else:
             client = adjutant_client.Client(1, parsed_args.bypass_url)
 

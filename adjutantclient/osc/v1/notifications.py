@@ -46,7 +46,7 @@ class NotificationList(command.Lister):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
 
         kwargs = {}
         if parsed_args.filters:
@@ -74,7 +74,7 @@ class NotificationShow(command.ShowOne):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         return _show_notification(parsed_args.notification_id, client,
                                   parsed_args.formatter)
 
@@ -89,6 +89,6 @@ class NotificationAcknowledge(command.Command):
         return parser
 
     def take_action(self, parsed_args):
-        client = self.app.client_manager.registration
+        client = self.app.client_manager.admin_logic
         resp = client.notifications.acknowledge(note_list=parsed_args.note_ids)
         print('Success', ' '.join(resp.notes))
