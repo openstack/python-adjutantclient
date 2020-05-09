@@ -21,6 +21,7 @@ Base utilities to build API operation managers and objects on top of.
 """
 import abc
 import copy
+import six
 
 from oslo_utils import reflection
 from oslo_utils import strutils

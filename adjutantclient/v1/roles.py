@@ -41,9 +41,7 @@ class ManagedRoleManager(base.ManagerWithFind):
         return self._list(url, 'roles')
 
     def get(self, role_id):
-        """
-        Get a role by role_id
-        """
+        """Get a role by role_id"""
         # Right now the only way is to list them all, then iterate.
         # Perhaps a filter or new endpoint would be useful here.
         roles = self.list()
@@ -58,13 +56,13 @@ class UserRoleManager(base.BaseManager):
 
     def list(self, **kwargs):
         """List roles for a given user"""
-        # TODO: Look up user by name/id
+        # TODO(adriant): Look up user by name/id
         url = '/openstack/users/%s/roles' % kwargs['user']
         return self._list(url, 'roles')
 
     def add(self, user, role=None, roles=None):
         """Add a role to a user"""
-        # TODO: resolve the roles and users into id's
+        # TODO(adriant): resolve the roles and users into id's
         # user_id = base.getid(user)
         user_id = user
         # role_id = role

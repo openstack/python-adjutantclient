@@ -12,8 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import logging
 import json
+import logging
 
 from osc_lib.command import command
 from osc_lib.i18n import _

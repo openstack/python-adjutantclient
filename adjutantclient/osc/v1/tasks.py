@@ -12,8 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import logging
 import json
+import logging
 from osc_lib.command import command
 from osc_lib.i18n import _
 
@@ -91,7 +91,7 @@ class TaskShow(command.ShowOne):
 
 
 class TaskApprove(command.ShowOne):
-    """ Approve and show details of a task."""
+    """Approve and show details of a task."""
     def get_parser(self, prog_name):
         parser = super(TaskApprove, self).get_parser(prog_name)
 
@@ -107,7 +107,7 @@ class TaskApprove(command.ShowOne):
 
 
 class TaskCancel(command.ShowOne):
-    """ Approve and show details of a task."""
+    """Approve and show details of a task."""
     def get_parser(self, prog_name):
         parser = super(TaskCancel, self).get_parser(prog_name)
 
@@ -143,7 +143,7 @@ class TaskUpdate(command.ShowOne):
 
 
 class TaskTokenReissue(command.Command):
-    """ Reissues a token for the provided pending task """
+    """Reissues a token for the provided pending task """
     def get_parser(self, prog_name):
         parser = super(TaskTokenReissue, self).get_parser(prog_name)
 

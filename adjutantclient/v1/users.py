@@ -82,7 +82,7 @@ class UserManager(base.ManagerWithFind):
         return paginate(params)
 
     def invite(self, username, email, role_list):
-        """ Invite a user to the current project. """
+        """Invite a user to the current project."""
 
         fields = {
             'username': username,
@@ -92,16 +92,12 @@ class UserManager(base.ManagerWithFind):
         return self.client.post('openstack/users', data=fields)
 
     def cancel(self, user_id):
-        """
-        Cancel a user invite task.
-        """
+        """Cancel a user invite task."""
         url = 'openstack/users/%s' % user_id
         return self._delete(url)
 
     def revoke(self, user_id):
-        """
-        revoke all user roles on project.
-        """
+        """Revoke all user roles on project."""
         # NOTE(adriant): This doesn't work yet.
         # Uses the same endpoint as cancel, but doesn't
         # yet actually revoke all roles if an actual user
@@ -118,8 +114,7 @@ class UserManager(base.ManagerWithFind):
                                 data=params)
 
     def password_force_reset(self, email):
-        """
-        Force a password reset for a user.
+        """Force a password reset for a user.
 
         This is an admin only function.
         """

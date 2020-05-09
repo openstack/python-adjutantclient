@@ -38,9 +38,7 @@ class NotificationManager(base.ManagerWithFind):
         return self._list(url, 'notifications')
 
     def acknowledge(self, note_id=None, note_list=[]):
-        """
-        Acknowledge a single notification or many.
-        """
+        """Acknowledge a single notification or many."""
         if note_id:
             data = {'acknowledged': True}
             url = 'notifications/%s' % note_id

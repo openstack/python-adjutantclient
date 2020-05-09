@@ -17,8 +17,8 @@ import logging
 import os
 
 from keystoneauth1 import adapter
-from keystoneauth1 import session as ks_session
 from keystoneauth1.identity import v3
+from keystoneauth1 import session as ks_session
 from oslo_utils import importutils
 import requests
 
@@ -98,7 +98,7 @@ class SessionClient(adapter.LegacyJsonAdapter):
             raise exc.InvalidEndpoint(message=message)
         if (self.endpoint_override is not None and
                 location.lower().startswith(self.endpoint_override.lower())):
-                return location[len(self.endpoint_override):]
+            return location[len(self.endpoint_override):]
         else:
             return location
 

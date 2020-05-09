@@ -14,9 +14,9 @@
 
 import logging
 
-from osc_lib import utils
 from osc_lib.command import command
 from osc_lib.i18n import _
+from osc_lib import utils
 
 from adjutantclient import client as adjutant_client
 from adjutantclient import exc
@@ -61,8 +61,8 @@ class UserShow(command.ShowOne):
 
 
 class UserInvite(command.Command):
-    """
-    Invites a user to become a member of a project.
+    """Invites a user to become a member of a project.
+
     User does not need to have an existing openstack account.
     """
 
@@ -92,7 +92,7 @@ class UserInvite(command.Command):
 
 
 class UserInviteCancel(command.Command):
-    """ Cancel invite(s) to a project."""
+    """Cancel invite(s) to a project."""
     def get_parser(self, prog_name):
         parser = super(UserInviteCancel, self).get_parser(prog_name)
 
@@ -114,7 +114,7 @@ class UserInviteCancel(command.Command):
 
 
 class UserRoleAdd(command.Command):
-    """ Add a role to a user."""
+    """Add a role to a user."""
     def get_parser(self, prog_name):
         parser = super(UserRoleAdd, self).get_parser(prog_name)
 
@@ -136,7 +136,7 @@ class UserRoleAdd(command.Command):
 
 
 class UserRoleRemove(command.Command):
-    """ Remove a role from a user."""
+    """Remove a role from a user."""
     def get_parser(self, prog_name):
         parser = super(UserRoleRemove, self).get_parser(prog_name)
 
@@ -178,7 +178,7 @@ class UserRoleList(command.Lister):
 
 
 class ManageableRolesList(command.Lister):
-    """ Lists roles able to be managed by the current user """
+    """Lists roles able to be managed by the current user """
     def take_action(self, parsed_args):
         client = self.app.client_manager.admin_logic
         roles = client.managed_roles.list()
@@ -189,7 +189,7 @@ class ManageableRolesList(command.Lister):
 
 
 class PasswordReset(command.Command):
-    """ Force password reset for a user, admin only. """
+    """Force password reset for a user, admin only. """
 
     def get_parser(self, prog_name):
         parser = super(PasswordReset, self).get_parser(prog_name)
@@ -217,7 +217,7 @@ class PasswordReset(command.Command):
 
 
 class PasswordForgot(command.Command):
-    """ Links to user forgotten password endpoint, does not require auth."""
+    """Links to user forgotten password endpoint, does not require auth."""
     auth_required = False
 
     def get_parser(self, prog_name):

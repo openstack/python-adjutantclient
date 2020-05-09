@@ -23,8 +23,8 @@ LOG = logging.getLogger(__name__)
 
 
 class QuotaShow(command.Lister):
-    """
-    Displays current quota information.
+    """Displays current quota information.
+
     If not given a region it will print basic details of the state of
     the quotas. If given a region it will print all details for it.
     """
@@ -71,9 +71,7 @@ class QuotaShow(command.Lister):
 
 
 class QuotaSizes(command.Lister):
-    """
-    Displays possible quota sizes.
-    """
+    """Displays possible quota sizes."""
 
     def take_action(self, parsed_args):
         client = self.app.client_manager.admin_logic
@@ -93,9 +91,7 @@ class QuotaSizes(command.Lister):
 
 
 class QuotaTasks(command.Lister):
-    """
-    Displays quota tasks.
-    """
+    """Displays quota tasks."""
 
     def take_action(self, parsed_args):
         client = self.app.client_manager.admin_logic

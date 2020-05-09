@@ -38,15 +38,12 @@ class TaskManager(base.ManagerWithFind):
         return self._list(url, 'tasks')
 
     def update(self, task_id, data):
-        """
-        Update a task with new data and rerun pre-approve validation.
-        """
+        """Update a task with new data and rerun pre-approve validation."""
         url = 'tasks/%s' % task_id
         return self._put(url, data)
 
     def approve(self, task_id):
-        """
-        Approve a task.
+        """Approve a task.
 
         If already approved will rerun post-approve validation
         and reissue/resend token.
@@ -56,8 +53,6 @@ class TaskManager(base.ManagerWithFind):
         return self._post(url, data)
 
     def cancel(self, task_id):
-        """
-        Cancel a task.
-        """
+        """Cancel a task."""
         url = 'tasks/%s' % task_id
         return self._delete(url)

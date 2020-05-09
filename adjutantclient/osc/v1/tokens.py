@@ -12,8 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import logging
 import json
+import logging
 
 from osc_lib.command import command
 from osc_lib.i18n import _
@@ -24,13 +24,13 @@ LOG = logging.getLogger(__name__)
 
 
 def _list_tokens(client, filters={}):
-        tokens = client.tokens.list(filters=filters)
+    tokens = client.tokens.list(filters=filters)
 
-        headers = ['Token', 'Task', 'Expires on', 'Created on']
-        rows = [[token.token, token.task, token.expires,
-                 token.created_on] for token in tokens]
+    headers = ['Token', 'Task', 'Expires on', 'Created on']
+    rows = [[token.token, token.task, token.expires,
+             token.created_on] for token in tokens]
 
-        return headers, rows
+    return headers, rows
 
 
 class TokenList(command.Lister):

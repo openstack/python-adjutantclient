@@ -14,13 +14,13 @@
 
 from adjutantclient.common import http
 from adjutantclient.v1 import notifications
+from adjutantclient.v1 import quota
 from adjutantclient.v1 import roles
 from adjutantclient.v1 import signup
 from adjutantclient.v1 import status
 from adjutantclient.v1 import tasks
 from adjutantclient.v1 import tokens
 from adjutantclient.v1 import users
-from adjutantclient.v1 import quota
 
 
 class Client(object):

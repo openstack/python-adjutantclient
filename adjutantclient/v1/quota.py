@@ -20,7 +20,7 @@ from adjutantclient.common import base
 class QuotaManager(base.BaseManager):
 
     def get(self, regions=None):
-        """ Gets data about current quota settings """
+        """Gets data about current quota settings"""
         url = '/openstack/quotas/'
         if regions:
             url += '?%s' % parse.urlencode({
@@ -29,7 +29,8 @@ class QuotaManager(base.BaseManager):
         return self.client.get(url).json()
 
     def update(self, size, regions=None):
-        """ Updates the quota to a specified size.
+        """Updates the quota to a specified size.
+
         If region is not set it will update all regions
         """
         url = '/openstack/quotas/'
