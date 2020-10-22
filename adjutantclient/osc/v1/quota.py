@@ -13,7 +13,6 @@
 #    under the License.
 
 import logging
-import six
 
 from osc_lib.command import command
 from osc_lib.i18n import _
@@ -61,9 +60,8 @@ class QuotaShow(command.Lister):
             region = quota_data['regions'][0]
 
             rows = []
-            for service, service_detail in six.iteritems(
-                    region['current_usage']):
-                for resource, value in six.iteritems(service_detail):
+            for service, service_detail in region['current_usage'].items():
+                for resource, value in service_detail.items():
                     current_quota = region['current_quota'][service].get(
                         resource)
                     rows.append([service, resource, current_quota, value])
@@ -82,9 +80,9 @@ class QuotaSizes(command.Lister):
             'Size Name', 'Service', 'Resource', 'Value']
 
         rows = []
-        for size, size_details in six.iteritems(quota_data['quota_sizes']):
-            for service, service_details in six.iteritems(size_details):
-                for resource, value in six.iteritems(service_details):
+        for size, size_details in quota_data['quota_sizes'].items():
+            for service, service_details in size_details.items():
+                for resource, value in service_details.items():
                     rows.append([size, service, resource, value])
 
         return headers, rows

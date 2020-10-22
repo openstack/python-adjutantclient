@@ -14,7 +14,7 @@
 
 from adjutantclient.common import base
 
-from six.moves.urllib import parse
+from urllib import parse
 
 
 class Token(base.Resource):
