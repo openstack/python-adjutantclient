@@ -16,7 +16,6 @@ doc/build
 adjutantclient/versioninfo
 *.egg-info
 *.log
-.testrepository
 .pypirc
 env/
 *~
