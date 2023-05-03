@@ -144,7 +144,7 @@ class UserRoleRemove(command.Command):
             'user', metavar='<user>',
             help=_("The user's name or id.."))
         parser.add_argument(
-            'role', metavar='<user>',
+            'role', metavar='<role>',
             help=_("The role's name or id."))
         return parser
 
