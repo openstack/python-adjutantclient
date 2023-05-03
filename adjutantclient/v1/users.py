@@ -13,7 +13,7 @@
 #    under the License.
 
 
-from moves.urllib import parse
+from urllib import parse
 
 from adjutantclient.common import base
 
