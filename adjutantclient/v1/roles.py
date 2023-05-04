@@ -87,6 +87,7 @@ class UserRoleManager(base.BaseManager):
 
     def remove(self, user_id, role=None, roles=None):
         """Remove a role or roles from a user"""
+
         if role:
             params = {
                 'roles': [role]
@@ -99,7 +100,7 @@ class UserRoleManager(base.BaseManager):
         route = '/openstack/users/%s/roles'
         url = route % (user_id)
         try:
-            self._delete(url, json=params, response_key=None)
+            self._delete(url, json=params)
         except exc.HTTPBadRequest as e:
             print(e.message)
             return False

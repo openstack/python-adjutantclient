@@ -198,12 +198,14 @@ class BaseManager(HookableMixin):
         else:
             return self.resource_class(self, body)
 
-    def _delete(self, url):
+    def _delete(self, url, json=None):
         """Delete an object.
 
         :param url: a partial URL, e.g., '/servers/my-server'
+        :param json: data that will be encoded as JSON and sent with the
+            DELETE request.
         """
-        return self.client.delete(url)
+        return self.client.delete(url, json=json)
 
 
 class ManagerWithFind(BaseManager, metaclass=abc.ABCMeta):
