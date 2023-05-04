@@ -171,10 +171,8 @@ class UserRoleList(command.Lister):
         client = self.app.client_manager.admin_logic
 
         user = utils.find_resource(client.users, parsed_args.user)
-        kwargs = {'user': user.id}
-        roles = [[role.id, role.name] for role
-                 in client.user_roles.list(**kwargs)]
-        return ['id', 'name'], roles
+
+        return ['name'], [[role] for role in user.roles]
 
 
 class ManageableRolesList(command.Lister):
