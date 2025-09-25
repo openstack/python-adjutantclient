@@ -32,10 +32,18 @@ class UserList(command.Lister):
         project_users = client.users.list()
         headers = [
             'id', 'name', 'email', 'roles', 'cohort', 'status']
+        optional_headers = ['has_mfa']
 
-        rows = [[user.id, user.name, user.email,
-                 user.roles, user.cohort, user.status]
-                for user in project_users]
+        rows = []
+        for user in project_users:
+            # Check the first user for optional headers.
+            for opt in optional_headers:
+                if hasattr(user, opt):
+                    headers.append(opt)
+            optional_headers = []
+            rows.append([
+                getattr(user, header) for header in headers
+            ])
 
         return headers, rows
 

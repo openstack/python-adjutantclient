@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add support for optionally displaying column use_mfa in user list if
+    Adjutant API returns this in the query. This may be added to responses if
+    Adjutant MFA server plugin is installed and the user has the appropriate
+    roles in the project otherwise it is omitted.
