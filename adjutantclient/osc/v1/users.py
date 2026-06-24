@@ -12,6 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from collections import defaultdict
 import logging
 
 from osc_lib.command import command
@@ -31,7 +32,7 @@ class UserList(command.Lister):
         client = self.app.client_manager.admin_logic
         project_users = client.users.list()
         headers = [
-            'id', 'name', 'email', 'roles', 'cohort', 'status']
+            'id', 'name', 'email', 'roles', 'group_roles', 'cohort', 'status']
         optional_headers = ['has_mfa']
 
         rows = []
@@ -41,9 +42,25 @@ class UserList(command.Lister):
                 if hasattr(user, opt):
                     headers.append(opt)
             optional_headers = []
-            rows.append([
-                getattr(user, header) for header in headers
-            ])
+
+            group_roles_by_group = defaultdict(list)
+            group_roles_by_role = getattr(user, 'group_roles', [])
+            for group_role in group_roles_by_role:
+                group_roles_by_group[group_role.get('group_name')].append(
+                    group_role.get('role')
+                )
+            user.group_roles = dict(group_roles_by_group)
+
+            # Properly format the row
+            row = []
+            for header in headers:
+                val = getattr(user, header, '')
+                if isinstance(val, list):
+                    # Flatten the list
+                    val = ", ".join(val)
+
+                row.append(val)
+            rows.append(row)
 
         return headers, rows
 
@@ -180,7 +197,22 @@ class UserRoleList(command.Lister):
 
         user = utils.find_resource(client.users, parsed_args.user)
 
-        return ['name'], [[role] for role in user.roles]
+        # Create a two-column table of direct roles and group-inherited roles
+        headers = ['Role', 'Group']
+        rows = []
+
+        # Add direct roles (leaving the Group column blank)
+        for role in getattr(user, 'roles', []):
+            rows.append([role, ""])
+
+        # Add group-inherited roles
+        for gr in getattr(user, 'group_roles', []):
+            rows.append([
+                gr.get('role', ''),
+                gr.get('group_name', '')
+            ])
+
+        return headers, rows
 
 
 class ManageableRolesList(command.Lister):
