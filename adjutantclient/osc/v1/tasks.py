@@ -107,7 +107,7 @@ class TaskApprove(command.ShowOne):
 
 
 class TaskCancel(command.ShowOne):
-    """Approve and show details of a task."""
+    """Cancel and show details of a task."""
     def get_parser(self, prog_name):
         parser = super(TaskCancel, self).get_parser(prog_name)
 
